@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "3df181db-58fc-4c10-9609-bb83b191dcae",
+		"name": "Serverest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/produtos",
+			"item": [
+				{
+					"name": "get_produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsons = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tem propriedades 'quantidade'\", () => {\r",
+									"    pm.expect(jsons).has.property(\"quantidade\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tem propriedade 'produtos'\", () => {\r",
+									"    pm.expect(jsons).has.property(\"produtos\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificae se '_id' existe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    //console.log(jsonData.produtos[0]);\r",
+									"    pm.expect(jsonData.produtos[0]).has.property(\"_id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Nome deve ser classificado como strig\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    //console.log(jsonData.produtos[0].nome);\r",
+									"    pm.expect(jsonData.produtos[0].nome).is.string;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Recebido informação dos produtos\", () => {\r",
+									"    //let jsons = pm.response.json();\r",
+									"    pm.expect(jsons.quantidade).equal(jsons.produtos.length);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"\",\r\n    \"nome\": \"\",\r\n    \"preco\": \"\",\r\n    \"descricao\": \"\",\r\n    \"quantidade\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.equal(201);\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: \"http://localhost:3000/login\",\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'content-type': 'application/json'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"email\": \"fulano@qa.com\",\r",
+									"            \"password\": \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}, (err, res) => pm.environment.set(\"TOKEN\", res.json().authorization.slice(7)));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomProduct, $randomProduct}}l\",\r\n  \"preco\": {{$randomInt}},\r\n  \"descricao\": \"{{$randomProduct}}\",\r\n  \"quantidade\": {{$randomInt}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produtos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/login",
+			"item": [
+				{
+					"name": "post_login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'message' existe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'authorization' existe\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.property(\"authorization\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_login - Many Args",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.equal(400);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'message' falha\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.not.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'authorization' falha\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.not.property(\"authorization\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste\",\r\n    \"ratatatata\": \"ranranranran\",\r\n    \"I'm Error\": \"Where is Link?\",\r\n    \"FonFon\": \"Bibibibibibibibi\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post_login - Few Args",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.equal(400);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'message' falha\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.not.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se propriedade 'authorization' falha\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.not.property(\"authorization\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": null,\r\n    \"password\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

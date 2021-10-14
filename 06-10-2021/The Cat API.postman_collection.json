@@ -1,0 +1,793 @@
+{
+	"info": {
+		"_postman_id": "dcd38c94-a376-485c-999e-7d32a238e164",
+		"name": "The Cat API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/images",
+			"item": [
+				{
+					"name": "{image_id}",
+					"item": [
+						{
+							"name": "✔ Get Image",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{$$.env.x-api-key}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/images/{{image_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"images",
+										"{{image_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "✔ Delete an Uploaded Image",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{$$.env.x-api-key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/images/{{image_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"images",
+										"{{image_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "✔ Get Analisys results of an Uploaded Image",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/images/{{image_id}}/analysis",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"images",
+										"{{image_id}}",
+										"analysis"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/upload",
+					"item": [
+						{
+							"name": "🤷‍♂️ Upload a Specific Image",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{$$.env.x-api-key}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"value": "test.png",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/images/upload",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"images",
+										"upload"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/search",
+					"item": [
+						{
+							"name": "✔ Get all public Images",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{$$.env.x-api-key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/images/search",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"images",
+										"search"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "✔ Get your uploaded Image",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{$$.env.x-api-key}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/images/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"images",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/categories",
+			"item": [
+				{
+					"name": "✔ List the CATegories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{$$.env.x-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "limit",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/breeds",
+			"item": [
+				{
+					"name": "✔ List the cats Breeds",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attach_breed",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/breeds",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"breeds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✔ Search for breeds by Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{$$.env.x-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "q",
+									"value": "Bengal",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/breeds/search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"breeds",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/votes",
+			"item": [
+				{
+					"name": "{vote_id}",
+					"item": [
+						{
+							"name": "✔ Get a specific Vote",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/votes/{{vote_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"votes",
+										"{{vote_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "✔ Get your Votes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{$$.env.x-api-key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "sub_id",
+									"value": "332715",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/votes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✔ Create a Vote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"image_id\": \"asf2\",\r\n  \"sub_id\": \"my-user-1234\",\r\n  \"value\": 1\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/votes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"votes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✔ Delete a Vote",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/votes/{{vote_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"votes",
+								"{{vote_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/favourites",
+			"item": [
+				{
+					"name": "{favourite_id}",
+					"item": [
+						{
+							"name": "✔ Get a specifc Favorite",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/favourites/{{favourite_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"favourites",
+										"{{favourite_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "✔ Delete a Favourite from your Account",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/favourites/{{favourite_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"favourites",
+										"{{favourite_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "✔ Save an Image as a Favourite",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "x-api-key",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"image_id\": \"9ccXTANkb\",\r\n  \"sub_id\": \"your-user-1234\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/favourites/{{favourite_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"favourites",
+										"{{favourite_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "✔ Get your Favourites",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "9ff7efa4-e3bd-4a7b-b7c0-66cd8202dfd6",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "sub_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/favourites",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"favourites"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
